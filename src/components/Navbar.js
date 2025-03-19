@@ -12,12 +12,18 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-title">E-Learning Dashboard</Link>
+        <Link to="/" className="navbar-title">
+          E-Learning Dashboard
+        </Link>
         <div className="navbar-links">
           <Link to="/">Dashboard</Link>
-          <Link to="/courses">Courses</Link>
+
           {token ? (
-            <button onClick={handleLogout}>Logout</button>
+            <>
+              <Link to="/create-course">Create Course</Link>
+              <Link to="/quiz">Quiz</Link> {/* Add Quiz link */}
+              <button onClick={handleLogout}>Logout</button>
+            </>
           ) : (
             <>
               <Link to="/login">Login</Link>

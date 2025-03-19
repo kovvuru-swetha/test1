@@ -11,7 +11,7 @@ const LoginPage = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('YOUR_BACKEND_LOGIN_API', credentials);
+      const response = await axios.post('https://localhost:7185/api/Auth/login', credentials);
       localStorage.setItem('token', response.data.token);
       onLogin(response.data.user);
       alert('Logged in successfully!');

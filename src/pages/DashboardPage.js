@@ -1,47 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import Course from '../components/Course';
 import EnrollmentDashboard from '../components/EnrollmentDashboard';
 
 const DashboardPage = () => {
   console.log("DashboardPage rendered");
-  const [courses, setCourses] = useState([]);
+
+  // Mock data for courses
+  const mockCourses = [
+    {
+      id: 1,
+      title: 'Introduction to Programming',
+      description: 'Learn the basics of programming.',
+      enrolled: false,
+    },
+    {
+      id: 2,
+      title: 'Advanced JavaScript',
+      description: 'Deep dive into JavaScript concepts.',
+      enrolled: false,
+    },
+    {
+      id: 3,
+      title: 'React for Beginners',
+      description: 'Learn React from scratch.',
+      enrolled: false,
+    },
+  ];
+
+  // Initialize state with mock data
+  const [courses, setCourses] = useState(mockCourses);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get('YOUR_BACKEND_COURSES_API', {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        });
-        setCourses(response.data);
-      } catch (error) {
-        console.error('Error fetching courses:', error);
-      }
-    };
+  // Handle enrollment
+  const handleEnroll = (courseId) => {
+    // Find the course to enroll
+    const courseToEnroll = courses.find((course) => course.id === courseId);
 
-    const fetchEnrolledCourses = async () => {
-      try {
-        const response = await axios.get('YOUR_BACKEND_ENROLLED_COURSES_API', {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        });
-        setEnrolledCourses(response.data);
-      } catch (error) {
-        console.error('Error fetching enrolled courses:', error);
-      }
-    };
+    if (courseToEnroll && !courseToEnroll.enrolled) {
+      // Mark the course as enrolled
+      const updatedCourses = courses.map((course) =>
+        course.id === courseId ? { ...course, enrolled: true } : course
+      );
 
-    fetchCourses();
-    fetchEnrolledCourses();
-  }, []);
+      // Add the course to the enrolled list
+      setEnrolledCourses((prev) => [...prev, courseToEnroll]);
 
-  const handleEnroll = (enrolledCourse) => {
-    setEnrolledCourses((prev) => [...prev, enrolledCourse]);
-    setCourses((prev) =>
-      prev.map((course) =>
-        course.id === enrolledCourse.id ? { ...course, enrolled: true } : course
-      )
-    );
+      // Update the courses state
+      setCourses(updatedCourses);
+    }
   };
 
   return (
@@ -50,7 +56,11 @@ const DashboardPage = () => {
       <h2>Available Courses</h2>
       <div className="flex-wrap">
         {courses.map((course) => (
-          <Course key={course.id} course={course} onEnroll={handleEnroll} />
+          <Course
+            key={course.id}
+            course={course}
+            onEnroll={() => handleEnroll(course.id)} // Pass the course ID to handleEnroll
+          />
         ))}
       </div>
       <EnrollmentDashboard enrolledCourses={enrolledCourses} />

@@ -1,5 +1,4 @@
 import React from 'react';
-import Progress from './Progress';
 
 const EnrollmentDashboard = ({ enrolledCourses }) => {
   return (
@@ -11,8 +10,7 @@ const EnrollmentDashboard = ({ enrolledCourses }) => {
         enrolledCourses.map((course) => (
           <div key={course.id}>
             <h3>{course.title}</h3>
-            <Progress progress={course.progress} />
-            <a href={`/courses/${course.id}`}>View Course</a>
+            <p>{course.description}</p>
           </div>
         ))
       )}

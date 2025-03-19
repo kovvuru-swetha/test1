@@ -11,7 +11,7 @@ const RegisterPage = ({ onRegister }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('YOUR_BACKEND_REGISTER_API', userData);
+      const response = await axios.post('https://localhost:7185/api/Auth/register', userData);
       onRegister(response.data.user);
       alert('Registration successful! Please log in.');
     } catch (error) {

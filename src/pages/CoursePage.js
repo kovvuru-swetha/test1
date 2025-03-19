@@ -6,22 +6,31 @@ import Progress from '../components/Progress';
 const CoursePage = () => {
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await axios.get(`YOUR_BACKEND_COURSE_API/${courseId}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        const token = localStorage.getItem('token');
+        if (!token) {
+          setError('You must be logged in to view this course.');
+          return;
+        }
+
+        const response = await axios.get(`https://localhost:7185/api/Course/${courseId}`, {
+          headers: { Authorization: `Bearer ${token}` },
         });
         setCourse(response.data);
       } catch (error) {
         console.error('Error fetching course:', error);
+        setError('Failed to fetch course. Please try again later.');
       }
     };
 
     fetchCourse();
   }, [courseId]);
 
+  if (error) return <div>{error}</div>;
   if (!course) return <div>Loading...</div>;
 
   return (

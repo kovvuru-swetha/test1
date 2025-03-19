@@ -1,42 +1,55 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const Quiz = ({ quiz }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async () => {
-    if (!selectedOption) {
-      alert('Please select an option!');
-      return;
+  const handleAnswerSelection = (option) => {
+    if (!isSubmitted) {
+      setSelectedAnswer(option);
     }
-    try {
-      const response = await axios.post('YOUR_BACKEND_QUIZ_API', {
-        quizId: quiz.id,
-        selectedOption,
-      });
-      alert('Quiz submitted successfully!');
-    } catch (error) {
-      console.error('Error submitting quiz:', error);
-      alert('Failed to submit quiz.');
-    }
+  };
+
+  const handleSubmit = () => {
+    setIsSubmitted(true);
   };
 
   return (
     <div className="quiz-card">
       <h3>{quiz.question}</h3>
-      {quiz.options.map((option, index) => (
-        <div key={index}>
-          <input
-            type="radio"
-            id={`option-${index}`}
-            name={`quiz-${quiz.id}`}
-            value={option}
-            onChange={(e) => setSelectedOption(e.target.value)}
-          />
-          <label htmlFor={`option-${index}`}>{option}</label>
-        </div>
-      ))}
-      <button onClick={handleSubmit}>Submit</button>
+      <ul>
+        {quiz.options.map((option, index) => (
+          <li
+            key={index}
+            onClick={() => handleAnswerSelection(option)}
+            style={{
+              backgroundColor:
+                isSubmitted && option === quiz.correctAnswer
+                  ? 'lightgreen'
+                  : isSubmitted && option === selectedAnswer
+                  ? 'lightcoral'
+                  : selectedAnswer === option
+                  ? 'lightblue'
+                  : 'white',
+              cursor: isSubmitted ? 'not-allowed' : 'pointer',
+            }}
+          >
+            {option}
+          </li>
+        ))}
+      </ul>
+      {!isSubmitted && (
+        <button onClick={handleSubmit} disabled={!selectedAnswer}>
+          Submit
+        </button>
+      )}
+      {isSubmitted && (
+        <p>
+          {selectedAnswer === quiz.correctAnswer
+            ? 'Correct!'
+            : `Incorrect. The correct answer is: ${quiz.correctAnswer}`}
+        </p>
+      )}
     </div>
   );
 };
