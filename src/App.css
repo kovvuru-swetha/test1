@@ -1,0 +1,248 @@
+/* App layout styles */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: 0;
+}
+
+/* General styles for headings */
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #2563eb;
+  padding: 1rem;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links a {
+  margin-right: 1rem;
+  color: white;
+}
+
+.navbar-links button {
+  background-color: #ef4444;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.navbar-links button:hover {
+  background-color: #dc2626;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #1f2937;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Course card styles (used in Course.js) */
+.course-card {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem;
+  width: 16rem;
+}
+
+.course-card p {
+  color: #4b5563;
+}
+
+.course-card button {
+  margin-top: 0.5rem;
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.course-card button:hover {
+  background-color: #2563eb;
+}
+
+.course-card button:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* Enrollment dashboard styles (used in EnrollmentDashboard.js) */
+.enrollment-dashboard {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.enrollment-dashboard a {
+  color: #3b82f6;
+}
+
+.enrollment-dashboard a:hover {
+  text-decoration: underline;
+}
+
+/* Progress bar styles (used in Progress.js) */
+.progress-bar {
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  height: 1rem;
+  margin-top: 0.5rem;
+}
+
+.progress-bar-fill {
+  background-color: #3b82f6;
+  height: 1rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar-fill span {
+  font-size: 0.75rem;
+  color: white;
+  padding-left: 0.5rem;
+}
+
+/* Quiz card styles (used in Quiz.js) */
+.quiz-card {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.quiz-card div {
+  margin: 0.5rem 0;
+}
+
+.quiz-card label {
+  margin-left: 0.5rem;
+}
+
+.quiz-card button {
+  margin-top: 0.5rem;
+  background-color: #10b981;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.quiz-card button:hover {
+  background-color: #059669;
+}
+
+/* Form styles (used in LoginPage.js and RegisterPage.js) */
+.form-container {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.form {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.form div {
+  margin-bottom: 1rem;
+}
+
+.form label {
+  display: block;
+  color: #374151;
+}
+
+.form input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+}
+
+.form button {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.form button[type="submit"] {
+  background-color: #3b82f6;
+}
+
+.form button[type="submit"]:hover {
+  background-color: #2563eb;
+}
+
+.form button[type="submit"].register {
+  background-color: #10b981;
+}
+
+.form button[type="submit"].register:hover {
+  background-color: #059669;
+}
+
+/* Container styles (used in pages) */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Flex wrap for course list */
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
